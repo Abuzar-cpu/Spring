@@ -9,6 +9,8 @@ import Yelo.northwind.dataAccess.abstracts.ProductDAO;
 import Yelo.northwind.entities.concretes.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.xml.crypto.Data;
 import java.util.List;
 
 @Service
@@ -31,5 +33,20 @@ public class ProductManager implements ProductService {
     public Result add(Product product) {
         this.productDao.save(product);
         return new SuccessResult("Product added");
+    }
+
+    @Override
+    public DataResult<Product> getProductsByProductName(String productName) {
+        return new SuccessDataResult<>("Product returned based on product name: " + productName, this.productDao.getProductsByProductName(productName));
+    }
+
+    @Override
+    public DataResult<List<Product>>getProductsByProductNameAndCategoryId (String productName, int categoryId) {
+        return new SuccessDataResult<>("Products returned based on product name and category id", this.productDao.getProductsByProductNameAndCategoryId(productName, categoryId));
+    }
+
+    @Override
+    public DataResult<List<Product>> getProductsByCategoryId(int categoryId) {
+        return new SuccessDataResult<>("Products returned based on category ID", this.productDao.getProductsByCategoryId(categoryId));
     }
 }

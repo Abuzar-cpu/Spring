@@ -19,5 +19,6 @@ public class NorthwindApplication {
 	public Docket productApi() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors.basePackage("Yelo.northwind")).build();
+
 	}
 }

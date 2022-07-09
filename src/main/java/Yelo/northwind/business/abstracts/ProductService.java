@@ -8,4 +8,8 @@ import java.util.List;
 public interface ProductService {
     DataResult<List<Product>> getAll();
     Result add(Product product);
+
+    DataResult<Product> getProductsByProductName(String productName);
+    DataResult<List<Product>> getProductsByCategoryId(int categoryId);
+    DataResult<List<Product>>getProductsByProductNameAndCategoryId (String productName, int categoryId);
 }

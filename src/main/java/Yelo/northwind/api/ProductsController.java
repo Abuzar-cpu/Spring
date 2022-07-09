@@ -6,7 +6,6 @@ import Yelo.northwind.core.utilities.results.Result;
 import Yelo.northwind.entities.concretes.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -31,4 +30,18 @@ public class ProductsController {
         return this.productService.add(product);
     }
 
+    @GetMapping("/getByProductName")
+    public DataResult<Product> getProductsByProductName(@RequestParam String productName) {
+        return this.productService.getProductsByProductName(productName);
+    }
+
+    @GetMapping("/getByProductNameAndCategoryId")
+    public DataResult<List<Product>>getProductsByProductNameAndCategoryId (@RequestParam String productName, @RequestParam int categoryId) {
+        return this.productService.getProductsByProductNameAndCategoryId(productName, categoryId);
+    }
+
+    @GetMapping("/getByCategoryId")
+    public DataResult<List<Product>> getProductsByCategoryId(@RequestParam int categoryId) {
+        return this.productService.getProductsByCategoryId(categoryId);
+    }
 }
