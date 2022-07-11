@@ -9,8 +9,6 @@ import Yelo.northwind.dataAccess.abstracts.ProductDAO;
 import Yelo.northwind.entities.concretes.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.xml.crypto.Data;
 import java.util.List;
 
 @Service
@@ -53,5 +51,20 @@ public class ProductManager implements ProductService {
     @Override
     public DataResult<List<Product>> getProductsByProductNameOrCategoryId (String productName, int categoryId) {
         return new SuccessDataResult<>("Data returned based on product name or category ID", this.productDao.getProductsByProductNameOrCategoryId(productName, categoryId));
+    }
+
+    @Override
+    public DataResult<List<Product>> getProductsByCategoryIdIn(List<Integer> categoryIds) {
+        return new SuccessDataResult<>("Products returned based on category IDs", this.productDao.getProductsByCategoryIdIn(categoryIds));
+    }
+
+    @Override
+    public DataResult<List<Product>> getProductsByProductNameContainingIgnoreCase(String productName) {
+        return new SuccessDataResult<>("Products returned based on product name like", this.productDao.getProductsByProductNameContainingIgnoreCase(productName));
+    }
+
+    @Override
+    public DataResult<List<Product>> getProductBasedOnNameAndCategory(String productName, int id) {
+        return new SuccessDataResult<>("Custom Query works", this.productDao.getProductBasedOnNameAndCategory(productName, id));
     }
 }

@@ -50,5 +50,18 @@ public class ProductsController {
         return this.productService.getProductsByProductNameOrCategoryId(productName, categoryId);
     }
 
+    @GetMapping("getProductsByCategoryIdIn")
+    public DataResult<List<Product>> getProductsByCategoryIdIn(@RequestParam List<Integer> categoryIds) {
+        return this.productService.getProductsByCategoryIdIn(categoryIds);
+    }
 
+    @GetMapping("getProductsByProductNameContainingIgnoreCase")
+    DataResult<List<Product>> getProductsByProductNameContainingIgnoreCase(@RequestParam String productName) {
+        return this.productService.getProductsByProductNameContainingIgnoreCase(productName);
+    }
+
+    @GetMapping("custom")
+    DataResult<List<Product>> getProductBasedOnNameAndCategory(@RequestParam String productName, @RequestParam int id) {
+        return this.productService.getProductBasedOnNameAndCategory(productName, id);
+    }
 }
