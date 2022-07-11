@@ -16,5 +16,5 @@ public interface ProductDAO extends JpaRepository <Product, Integer> {
     // Custom Query
     // NOTE: There should not be spaces around =: operator
     @Query("From Product as p WHERE p.productName=:productName AND p.category.id=:id")
-    List<Product> getProductBasedOnNameAndCategory(String productName, int id); 
+    List<Product> getProductBasedOnNameAndCategory(String productName, int id);
 }
