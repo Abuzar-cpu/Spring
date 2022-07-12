@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ProductService {
     DataResult<List<Product>> getAll();
+    DataResult<List<Product>> getPage(int pageNumber, int pageSize);
+    DataResult<List<Product>> getAllSorted();
     Result add(Product product);
 
     DataResult<Product> getProductsByProductName(String productName);

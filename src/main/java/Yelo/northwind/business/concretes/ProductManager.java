@@ -1,13 +1,13 @@
 package Yelo.northwind.business.concretes;
 
 import Yelo.northwind.business.abstracts.ProductService;
-import Yelo.northwind.core.utilities.results.DataResult;
-import Yelo.northwind.core.utilities.results.Result;
-import Yelo.northwind.core.utilities.results.SuccessDataResult;
-import Yelo.northwind.core.utilities.results.SuccessResult;
+import Yelo.northwind.core.utilities.results.*;
 import Yelo.northwind.dataAccess.abstracts.ProductDAO;
 import Yelo.northwind.entities.concretes.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -25,6 +25,22 @@ public class ProductManager implements ProductService {
     public DataResult<List<Product>> getAll() {
         return new SuccessDataResult<>("All products returned", this.productDao.findAll()); // The query is done here. Do not search too much
         // prodcutDao extends jpaRepo which is an ORM
+    }
+    @Override
+    public DataResult<List<Product>> getPage(int pageNumber, int pageSize) {
+        if(pageNumber >= 0 && pageSize >= 0) {
+            Pageable pageable = PageRequest.of(pageNumber, pageSize);
+            return new SuccessDataResult<>("All products returned", this.productDao.findAll(pageable).getContent());
+        }
+        return new ErrDataResult<>("page size or number is incorrect", null);
+        // The query is done here. Do not search too much
+        // prodcutDao extends jpaRepo which is an ORM
+    }
+
+    @Override
+    public DataResult<List<Product>> getAllSorted() {
+        Sort sort = Sort.by(Sort.Direction.ASC, "productName");
+        return new SuccessDataResult<>("Data returned in asc direction", this.productDao.findAll(sort));
     }
 
     @Override
